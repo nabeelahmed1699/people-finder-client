@@ -52,7 +52,7 @@ function Details({ person }) {
 					</TableBody>
 				</Table>
 			</TableContainer>
-			<Stack direction='row' sx={{gap:2,mb:4}}>
+			<Stack direction='row' sx={{ gap: 2, mb: 4 }}>
 				<Stack direction='row'>
 					<LocalPhoneOutlinedIcon />
 					<Typography variant='body1' fontWeight={600}>
@@ -66,14 +66,14 @@ function Details({ person }) {
 			{person.photo && (
 				<Box
 					sx={{
-						borderRadius:1,
-						overflow:'hidden',
-						'& >img': {
-							maxWidth: '100%',
-						},
+						borderRadius: 1,
+						overflow: 'hidden',
+						height: 350,
+						backgroundImage: `url("${person.photo}")`,
+						backgroundRepeat: 'no-repeat',
+						backgroundSize: 'contain',
 					}}
 				>
-					<img src={person.photo} alt={person.name} />
 				</Box>
 			)}
 		</Box>

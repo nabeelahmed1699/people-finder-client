@@ -29,7 +29,7 @@ const CustomModal = ({
 		p: 2,
 		pt: 1,
     borderRadius: 1,
-    maxHeight:"80vh",
+    maxHeight:"90vh",
     overflow:'auto'
 	};
 	return (
@@ -60,7 +60,7 @@ const CustomModal = ({
 						</Typography>
 					</Stack>
 				)}
-				<Box sx={{mt:4}}>{children}</Box>
+				<Box sx={{mt:4,maxHeight: "calc(80vh - 64px)",overflow:'auto'}}>{children}</Box>
 			</Box>
 		</Modal>
 	);

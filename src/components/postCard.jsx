@@ -6,29 +6,20 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
+import Typography from '@mui/material/Typography';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 // custom
 import Details from './details';
 
-const person = {
-	name: 'Nabeel Ahmed',
-	age: 23,
-	fatherName: 'Rizwan Nafees',
-	motherName: 'Huma Rizwan',
-	mentalCondition: 'Fine',
-	physicalCondition: 'Fine',
-	street: 'sfasda',
-	city: 'Lahore',
-	country: 'pakistan',
-	photo:
-		'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-};
-
-const PostCard = ({ data = person, openDetail, setDetailsPerson }) => {
-	console.log('DATA=>', data);
+const PostCard = ({
+	data,
+	headerObject,
+	openDetail,
+	setDetailsPerson,
+	openImageModal,
+}) => {
 	return (
 		<>
 			<Card
@@ -41,16 +32,20 @@ const PostCard = ({ data = person, openDetail, setDetailsPerson }) => {
 				}}
 			>
 				<CardHeader
-					avatar={<Avatar>{data.organizationInfo?.name.charAt(0)}</Avatar>}
-					title={data.organizationInfo?.name}
+					avatar={<Avatar>{headerObject.name.charAt(0)}</Avatar>}
+					title={headerObject.name}
 					subheader={moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
 				/>
 
 				<CardContent>
 					{data.photo && (
 						<Box
+							onClick={() => {
+								openImageModal();
+								setDetailsPerson(data);
+							}}
 							sx={{
-								minHeight: 320,
+								minHeight: 250,
 								backgroundImage: `url('${data.photo}')`,
 								backgroundRepeat: 'no-repeat',
 								backgroundSize: 'contain',
@@ -60,15 +55,32 @@ const PostCard = ({ data = person, openDetail, setDetailsPerson }) => {
 
 					{/* ====================info ===================== */}
 					<TableContainer>
-						<Table aria-label='simple table'>
+						<Table
+							sx={{
+								'& .MuiTableCell-root': {
+									p: 0.5,
+								},
+							}}
+						>
 							<TableBody>
 								<TableRow>
 									<TableCell>Name</TableCell>
 									<TableCell>{data.name}</TableCell>
 								</TableRow>
+								<TableRow>
+									<TableCell>Age</TableCell>
+									<TableCell>{data.age}</TableCell>
+								</TableRow>
+								<TableRow>
+									<TableCell>Father Name</TableCell>
+									<TableCell>{data.fatherName}</TableCell>
+								</TableRow>
 							</TableBody>
 						</Table>
 					</TableContainer>
+					<Typography variant='body2' color='text.secondary'>
+						{data.description}
+					</Typography>
 					<Stack direction='row' justifyContent='flex-end'>
 						<Button
 							onClick={() => {

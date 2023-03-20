@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import LogoPic from '../assets/logo.png';
 // icons
 import LoginIcon from '@mui/icons-material/Login';
+// constants
+import { ADMIN_PANEL_PORT } from '../constants';
 
 const Navbar = () => {
 	return (
@@ -26,7 +28,17 @@ const Navbar = () => {
 						alignItems='center'
 					>
 						<Logo />
-						<Button color='dark' variant='contained' size='large' startIcon={<LoginIcon/>}>Admin Login</Button>
+						<Button
+							LinkComponent='a'
+							href={ADMIN_PANEL_PORT}
+							color='dark'
+							variant='contained'
+							size='large'
+							startIcon={<LoginIcon />}
+							target='_blank'
+						>
+							Admin Login
+						</Button>
 					</Stack>
 				</CardContent>
 			</Card>
