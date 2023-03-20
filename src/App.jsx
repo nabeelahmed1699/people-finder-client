@@ -2,13 +2,15 @@
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import { Routes, Route } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
 // CUstom
-import Posts from './components/posts';
+import PostTabs from './PostsTab';
 import HeroSection from './components/heroSection';
 import Navbar from './components/navbar';
-import {theme} from "./theme"
+import { theme } from './theme';
+import ErrorPage from './components/error';
 
 function App() {
 	return (
@@ -24,15 +26,23 @@ function App() {
 				}}
 			>
 				<Navbar />
-				<Container maxWidth='xl'sx={{minHeight:'100%'}}>
-					<Box mt={4} minHeight='100%'>
-						<HeroSection />
-					</Box>
-					{/* <Posts /> */}
+				<Container maxWidth='xl' sx={{ minHeight: '100%' }}>
+					<Routes>
+						<Route path='/' element={<Hero />} />
+						<Route path='/posts' element={ <PostTabs/>} />
+						<Route path='/error' element={ <ErrorPage/>} />
+					</Routes>
 				</Container>
 			</div>
 		</ThemeProvider>
 	);
 }
 
+function Hero() {
+	return (
+		<Box mt={4} minHeight='100%'>
+			<HeroSection />
+		</Box>
+	);
+}
 export default App;

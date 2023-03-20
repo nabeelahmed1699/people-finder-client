@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-
+import React, { useState } from 'react';
+import moment from 'moment';
 // @mui
 import { Avatar, CardContent, CardHeader, Card, Box } from '@mui/material';
 import Table from '@mui/material/Table';
@@ -11,38 +11,52 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 // custom
-import CustomModal from './modal';
+import Details from './details';
 
-const PostCard = () => {
-	const [detailsModal, setDetailsModal] = useState(false);
-	const openDetail = () => setDetailsModal(true);
-	const closeDetail = () => setDetailsModal(false);
+const person = {
+	name: 'Nabeel Ahmed',
+	age: 23,
+	fatherName: 'Rizwan Nafees',
+	motherName: 'Huma Rizwan',
+	mentalCondition: 'Fine',
+	physicalCondition: 'Fine',
+	street: 'sfasda',
+	city: 'Lahore',
+	country: 'pakistan',
+	photo:
+		'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+};
 
+const PostCard = ({ data = person, openDetail, setDetailsPerson }) => {
+	console.log('DATA=>', data);
 	return (
 		<>
-			<Card>
+			<Card
+				sx={{
+					boxShadow:
+						'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
+					'& .MuiCardContent-root': {
+						pb: 1,
+					},
+				}}
+			>
 				<CardHeader
-					avatar={<Avatar>R</Avatar>}
-					title='Shrimp and Chorizo Paella'
-					subheader='September 14, 2016'
+					avatar={<Avatar>{data.organizationInfo?.name.charAt(0)}</Avatar>}
+					title={data.organizationInfo?.name}
+					subheader={moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
 				/>
 
 				<CardContent>
-					<Box
-						sx={{
-							maxHeight: '230px',
-							borderRadius: 1,
-							overflow: 'hidden',
-							'&>img': {
-								maxWidth: '100%',
-							},
-						}}
-					>
-						<img
-							src='https://images.unsplash.com/photo-1566275529824-cca6d008f3da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80'
-							alt='arshad'
-						/>
-					</Box>
+					{data.photo && (
+						<Box
+							sx={{
+								minHeight: 320,
+								backgroundImage: `url('${data.photo}')`,
+								backgroundRepeat: 'no-repeat',
+								backgroundSize: 'contain',
+							}}
+						></Box>
+					)}
 
 					{/* ====================info ===================== */}
 					<TableContainer>
@@ -50,19 +64,23 @@ const PostCard = () => {
 							<TableBody>
 								<TableRow>
 									<TableCell>Name</TableCell>
-									<TableCell>Ali Hassan</TableCell>
+									<TableCell>{data.name}</TableCell>
 								</TableRow>
 							</TableBody>
 						</Table>
 					</TableContainer>
 					<Stack direction='row' justifyContent='flex-end'>
-						<Button onClick={openDetail}>View More</Button>
+						<Button
+							onClick={() => {
+								openDetail();
+								setDetailsPerson(data);
+							}}
+						>
+							View details
+						</Button>
 					</Stack>
 				</CardContent>
 			</Card>
-			<CustomModal open={detailsModal} onClose={closeDetail} title='Details' subtitle='sbtitle'>
-
-			</CustomModal>
 		</>
 	);
 };

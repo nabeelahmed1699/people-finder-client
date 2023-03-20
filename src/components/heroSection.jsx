@@ -9,10 +9,11 @@ import Button from '@mui/material/Button';
 import BackgroundImage from '../assets/poor.jpg';
 // icons
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
 	return (
-		<Stack direction={{ md: 'row' }} sx={{ gap: 2,height:"100%", }}>
+		<Stack direction={{ md: 'row' }} sx={{ gap: 2, height: '100%' }}>
 			<BlackCard />
 			<ImageCard BackgroundImage={BackgroundImage} />
 		</Stack>
@@ -36,6 +37,7 @@ function ImageCard({ BackgroundImage }) {
 	);
 }
 function BlackCard() {
+	const navigate = useNavigate();
 	return (
 		<Card
 			sx={{
@@ -67,6 +69,7 @@ function BlackCard() {
 							borderRadius: '12px',
 						}}
 						startIcon={<SearchIcon />}
+						onClick={() => navigate('/posts')}
 					>
 						Browse People
 					</Button>
