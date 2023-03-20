@@ -11,26 +11,28 @@ import HeroSection from './components/heroSection';
 import Navbar from './components/navbar';
 import { theme } from './theme';
 import ErrorPage from './components/error';
+import ResponsiveAppBar from './components/appbar';
 
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
+			<CssBaseline />
 			<div
 				style={{
 					backgroundImage:
-						'radial-gradient(#bcbdbd 10%, transparent 11%),radial-gradient(#bdbcbc35 10%, transparent 11%)',
+						'radial-gradient(#bdbcbc35 10%, transparent 11%),radial-gradient(#bdbcbc35 10%, transparent 11%)',
 					backgroundSize: '60px 60px',
 					backgroundPosition: '0 0, 30px 30px',
 					backgroundRepeat: ' repeat',
 					minHeight: '97vh',
 				}}
 			>
-				<Navbar />
-				<Container maxWidth='xl' sx={{ minHeight: '100%' }}>
+				<ResponsiveAppBar/>
+				<Container maxWidth='xl' sx={{ minHeight: '100%', mt: `calc(${64}px + 16px)` }}>
 					<Routes>
 						<Route path='/' element={<Hero />} />
-						<Route path='/posts' element={ <PostTabs/>} />
-						<Route path='/error' element={ <ErrorPage/>} />
+						<Route path='/posts' element={<PostTabs />} />
+						<Route path='/error' element={<ErrorPage />} />
 					</Routes>
 				</Container>
 			</div>
