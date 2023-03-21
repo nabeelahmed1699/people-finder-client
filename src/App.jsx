@@ -1,5 +1,6 @@
+import { Toaster } from 'react-hot-toast';
+
 // @mui
-import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import { Routes, Route } from 'react-router-dom';
@@ -8,15 +9,16 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 // CUstom
 import PostTabs from './PostsTab';
 import HeroSection from './components/heroSection';
-import Navbar from './components/navbar';
 import { theme } from './theme';
 import ErrorPage from './components/error';
 import ResponsiveAppBar from './components/appbar';
+import CreatePostPage from './CreatePostPage';
 
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
+			<Toaster/>
 			<div
 				style={{
 					backgroundImage:
@@ -31,6 +33,7 @@ function App() {
 				<Container maxWidth='xl' sx={{ minHeight: '100%', mt: `calc(${64}px + 16px)` }}>
 					<Routes>
 						<Route path='/' element={<Hero />} />
+						<Route path='/createPost' element={<CreatePostPage />} />
 						<Route path='/posts' element={<PostTabs />} />
 						<Route path='/error' element={<ErrorPage />} />
 					</Routes>

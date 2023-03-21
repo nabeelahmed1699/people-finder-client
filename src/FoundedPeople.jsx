@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Navigate } from 'react-router-dom';
 // @mui
 import Grid from '@mui/material/Grid';
-import Box from "@mui/material/Box"
+import Box from '@mui/material/Box';
 // custom
 import PostCard from './components/postCard';
 import CardLoading from './components/cardLoading';
@@ -33,7 +33,7 @@ const FoundedPeople = ({ loading, error, value }) => {
 			const query = filterInput.toLowerCase();
 			return post.queryAbleString.includes(query);
 		});
-	}, [value,filterInput]);
+	}, [value, filterInput]);
 
 	return (
 		<>
@@ -47,16 +47,15 @@ const FoundedPeople = ({ loading, error, value }) => {
 								</Grid>
 							);
 					  })
-					: posts &&
-					  posts.map((person) => {
+					: posts.map((person) => {
 							return (
 								<Grid key={person._id} item xs={12} sm={6} lg={4} xl={3}>
 									<PostCard
 										data={person}
 										openDetail={openDetail}
 										setDetailsPerson={setDetailsPerson}
-										headerObject={person.organizationInfo}
-										openImageModal={ openImageModal}
+										posterName={person.organizationInfo.name}
+										openImageModal={openImageModal}
 									/>
 								</Grid>
 							);
@@ -79,14 +78,14 @@ const FoundedPeople = ({ loading, error, value }) => {
 						overflow: 'hidden',
 						height: 450,
 						width: '100%',
-						"&>img": {
-							maxWidth: "100%",
+						'&>img': {
+							maxWidth: '100%',
 							height: '100%',
-							objectFit:'contain'
-						}
+							objectFit: 'contain',
+						},
 					}}
 				>
-					<img src={detailsPerson.photo } alt={detailsPerson.name} />
+					<img src={detailsPerson.photo} alt={detailsPerson.name} />
 				</Box>
 			</CustomModal>
 		</>

@@ -30,7 +30,7 @@ const MissingPeople = ({ loading, error, value }) => {
 			const query = filterInput.toLowerCase();
 			return post.queryAbleString.includes(query);
 		});
-	}, [value,filterInput]);
+	}, [value, filterInput]);
 	console.log('missingValue', posts);
 
 	if (error !== undefined) {
@@ -47,26 +47,33 @@ const MissingPeople = ({ loading, error, value }) => {
 									<CardLoading />
 								</Grid>
 							);
-					  })
-					: posts &&
-					  posts.map((person) => {
+					})
+					: posts.map((person) => {
 							return (
 								<Grid key={person._id} item xs={12} sm={6} lg={4} xl={3}>
 									<PostCard
 										data={person}
 										openDetail={openDetail}
 										setDetailsPerson={setDetailsPerson}
-										headerObject={person.posterInfo}
-										openImageModal={ openImageModal}
+										posterName={
+											person.userType === 'registered'
+												? person.posterInfo.name
+												: person.guestName
+										}
+										openImageModal={openImageModal}
 									/>
 								</Grid>
 							);
-					  })}
+					})}
 			</Grid>
 			<CustomModal
 				open={detailsModal}
 				onClose={closeDetail}
-				title={detailsPerson.posterInfo?.name}
+				title={
+					detailsPerson.userType === 'registered'
+						? detailsPerson.posterInfo.name
+						: detailsPerson.guestName
+				}
 				subtitle={moment(detailsPerson.createdAt).format(
 					'MMMM Do YYYY, h:mm:ss a'
 				)}
@@ -80,14 +87,14 @@ const MissingPeople = ({ loading, error, value }) => {
 						overflow: 'hidden',
 						height: 450,
 						width: '100%',
-						"&>img": {
-							maxWidth: "100%",
+						'&>img': {
+							maxWidth: '100%',
 							height: '100%',
-							objectFit:'contain'
-						}
+							objectFit: 'contain',
+						},
 					}}
 				>
-					<img src={detailsPerson.photo } alt={detailsPerson.name} />
+					<img src={detailsPerson.photo} alt={detailsPerson.name} />
 				</Box>
 			</CustomModal>
 		</>

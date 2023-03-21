@@ -10,12 +10,10 @@ import Typography from '@mui/material/Typography';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-// custom
-import Details from './details';
 
 const PostCard = ({
 	data,
-	headerObject,
+	posterName,
 	openDetail,
 	setDetailsPerson,
 	openImageModal,
@@ -32,8 +30,8 @@ const PostCard = ({
 				}}
 			>
 				<CardHeader
-					avatar={<Avatar>{headerObject.name.charAt(0)}</Avatar>}
-					title={headerObject.name}
+					avatar={<Avatar>{posterName.charAt(0)}</Avatar>}
+					title={posterName}
 					subheader={moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
 				/>
 

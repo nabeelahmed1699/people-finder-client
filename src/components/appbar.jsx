@@ -94,6 +94,19 @@ function ResponsiveAppBar() {
 								</Stack>
 							</MuiLink>
 						</MenuItem>
+						<MenuItem onClick={handleCloseNavMenu}>
+						<MuiLink
+							component={Link}
+							to='/posts'
+							color='dark.main'
+							sx={{ fontSize: '1.5rem' }}
+						>
+							<Stack direction='row' sx={{ gap: 0.5 }}>
+								<SearchRoundedIcon />
+								<Typography>Posts</Typography>
+							</Stack>
+						</MuiLink>
+						</MenuItem>
 					</Menu>
 				</Box>
 				<AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -106,6 +119,15 @@ function ResponsiveAppBar() {
 						alignItems='center'
 						sx={{
 							gap: 4,
+							'& a': {
+								textDecoration: 'none',
+							},
+							"& a:hover": {
+								textDecoration:"underline"
+							},
+							'& p': {
+								fontWeight: 600,
+							},
 						}}
 					>
 						<MuiLink
